@@ -9,7 +9,21 @@
 <h1>Welcome!</h1>
 <br>
 <a href="{% url 'login' %}">LOGIN</a>
-<a href="{% url 'create_user' %}">NEW USER</a>
+<br>
+<a href="{% url 'create_user' %}">CREATE USER</a>
+
+<form method="POST">
+    {% csrf_token %}
+    {{  new_user_form.as_p  }}
+    <button>Submit New User</button>
+</form>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ game_form.as_p }}
+    <button>Submit New Game</button>
+</form>
+
 </body>
 
 </html>

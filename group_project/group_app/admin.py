@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import NewUserModel, GameModel
+from .models import UserModel, GameModel
 
 # Register your models here.
-
-admin.site.register(NewUserModel)
+admin.site.register(UserModel)
 admin.site.register(GameModel)
