@@ -119,8 +119,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
-
+# redirect login to my games function
 LOGIN_REDIRECT_URL = 'my_games'
-# LOGOUT_REDIRECT_URL = 'index'
+
 
 

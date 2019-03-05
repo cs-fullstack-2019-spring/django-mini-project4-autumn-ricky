@@ -6,25 +6,29 @@
 
 </head>
 <body>
+<!--welcome page-->
 <h1>Welcome!</h1>
 <br>
+<!--link to login from registration directory-->
 <a href="{% url 'login' %}">LOGIN</a>
 <br>
+<!--link to create new user from views-->
 <a href="{% url 'create_user' %}">CREATE USER</a>
 
+<!--new user from-->
 <form method="POST">
     {% csrf_token %}
     {{  new_user_form.as_p  }}
     <button>Submit New User</button>
 </form>
-
+<!-- new game form-->
 <form method="POST">
     {% csrf_token %}
     {{ game_form.as_p }}
     <button>Submit New Game</button>
 </form>
 
-
+<!--display games from game model-->
 {% for eachGame in games %}
     {{eachGame}}
 <a href="{% url 'edit_game' eachGame.id %}">Edit Game</a>
