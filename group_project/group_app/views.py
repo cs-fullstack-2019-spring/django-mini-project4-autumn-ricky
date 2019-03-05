@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from .forms import UserForm, GameForm, GameModel
+from .forms import UserForm, GameForm, GameModel, UserModel
 from django.contrib.auth.models import User
 
 
@@ -8,9 +8,13 @@ from django.contrib.auth.models import User
 def index(request):
     return render(request, 'group_app/index.html')
 
-
+ # function for games
 def my_games(request):
-    return HttpResponse('test my games')
+    games = GameModel.objects.all()
+    context = {
+        'games': games
+    }
+    return render(request, 'group_app/index.html', context)
 
 
 # render new game form
@@ -24,18 +28,25 @@ def add_game(request):
     if request.method == 'POST':
         # save will add user info to the model
         # game_fk_var = GameModel.objects.get(user_fk=request.user)
-          # save will add user info to the model
-         game_form.save()
-         return render(request, 'group_app/index.html', context)
+        game_form.save()
+        return render(request, 'group_app/index.html', context)
 
-    return render(request, 'group_app/index.html',context)
+    return render(request, 'group_app/index.html', context)
+
+# function for user to make edit
+def edit_game(request, id):
+    game_item = get_object_or_404(GameModel, pk=id)
+    edit_form = GameForm(request.POST or None, instance=game_item)
+    if edit_form.is_valid():
+        edit_form.save()
+        return redirect('index')
+    context = {
+        'form': edit_form
+    }
+    return render(request, 'group_app/index.html', context)
 
 
-def edit_game(request):
-    return None
-
-
-def delete_game(request):
+def delete_game(request, id):
     return None
 
 

@@ -24,6 +24,12 @@
     <button>Submit New Game</button>
 </form>
 
+
+{% for eachGame in games %}
+    {{eachGame}}
+<a href="{% url 'edit_game' eachGame.id %}">Edit Game</a>
+{% endfor %}
+
 </body>
 
 </html>
