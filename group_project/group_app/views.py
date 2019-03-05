@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 def index(request):
     return render(request, 'group_app/index.html')
 
-
+ # function for games
 def my_games(request):
     games = GameModel.objects.all()
     context = {
@@ -33,7 +33,7 @@ def add_game(request):
 
     return render(request, 'group_app/index.html', context)
 
-
+# function for user to make edit
 def edit_game(request, id):
     game_item = get_object_or_404(GameModel, pk=id)
     edit_form = GameForm(request.POST or None, instance=game_item)
