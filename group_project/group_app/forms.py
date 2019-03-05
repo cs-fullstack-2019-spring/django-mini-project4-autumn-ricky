@@ -1,14 +1,16 @@
 from django import forms
-from .models import GameModel, NewUserModel
+from .models import GameModel, UserModel
 
 
+# game model
 class GameForm(forms.ModelForm):
     class Meta:
         model = GameModel
-        exclude = ['game_developer']
+        fields = '__all__'
 
 
-class NewUserForm(forms.ModelForm):
+# user model
+class UserForm(forms.ModelForm):
     class Meta:
-        model = NewUserModel
+        model = UserModel
         exclude = ['date_account_created']

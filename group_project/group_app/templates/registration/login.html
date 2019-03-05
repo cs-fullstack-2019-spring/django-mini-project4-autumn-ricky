@@ -30,14 +30,7 @@
     <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
-<!--login page if the user is actually logged in-->
-{% if user.is_authenticated %}
-Hi {{ user.username }}!
-<p><a href="{% url 'logout' %}">logout</a></p>
-{% else %}
-<p>You are not logged in</p>
-<a href="{% url 'login' %}">login</a>
-{% endif %}
+
 <hr/>
 </body>
 </html>

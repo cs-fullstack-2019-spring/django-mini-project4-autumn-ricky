@@ -120,7 +120,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRCT_URL = 'my_games'
-# LOGOUT_REDIRCT_URL = 'index'
+LOGIN_REDIRECT_URL = 'my_games'
+# LOGOUT_REDIRECT_URL = 'index'
 
 
