@@ -14,7 +14,7 @@ def index(request):
 
 
 def my_games(request):
-    return None
+    return HttpResponse('test my games')
 
 
 def add_game(request):
