@@ -16,17 +16,19 @@ def my_games(request):
 # render new game form
 def add_game(request):
     game_form = GameForm(request.POST or None)
-    game_model = GameModel.objects.get(user_fk=request.user)
     # pass imported form and model
     context = {
         'game_form': game_form,
     }
+
     if request.method == 'POST':
         # save will add user info to the model
-        game_form.save()
-        return render(request, 'group_app/index.html', context)
+        # game_fk_var = GameModel.objects.get(user_fk=request.user)
+          # save will add user info to the model
+         game_form.save()
+         return render(request, 'group_app/index.html', context)
 
-    return render(request, 'group_app/index.html')
+    return render(request, 'group_app/index.html',context)
 
 
 def edit_game(request):
