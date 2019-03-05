@@ -20,7 +20,6 @@ def add_game(request):
     # pass imported form and model
     context = {
         'game_form': game_form,
-        'game_model': game_model
     }
     if request.method == 'POST':
         # save will add user info to the model
