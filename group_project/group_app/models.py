@@ -22,7 +22,7 @@ class GameModel(models.Model):
     game_developer = models.CharField(max_length=50, default='')
     game_dateMade = models.DateField(default=date.today),
     game_ageLimit = models.IntegerField(default=0)
-    game_fk = models.ForeignKey(UserModel, on_delete=models.CASCADE),
+    game_fk = models.ForeignKey(UserModel, on_delete=models.CASCADE, null=True, blank=True),
 
     def __str__(self):
         return self.game_name

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import UserForm, GameForm
+from .forms import UserForm, GameForm, GameModel
 from django.contrib.auth.models import User
 
 
@@ -16,17 +16,18 @@ def my_games(request):
 # render new game form
 def add_game(request):
     game_form = GameForm(request.POST or None)
-    # pass imported form
+    game_model = GameModel.objects.get(user_fk=request.user)
+    # pass imported form and model
     context = {
-        'game_form': game_form
+        'game_form': game_form,
+        'game_model': game_model
     }
-
     if request.method == 'POST':
         # save will add user info to the model
         game_form.save()
         return render(request, 'group_app/index.html', context)
 
-    return render(request, 'group_app/index.html', context)
+    return render(request, 'group_app/index.html')
 
 
 def edit_game(request):
