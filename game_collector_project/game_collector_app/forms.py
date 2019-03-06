@@ -1,4 +1,5 @@
 from django import forms
+from datetime import date
 from .models import GameModel, UserModel
 
 
@@ -35,10 +36,10 @@ class GameForm(forms.ModelForm):
             raise forms.ValidationError('Age must be 5 or above')
         return age_limit
 
-    # broken validation
-    # def clean_game_date_made(self):
-    #     date_made = self.cleaned_data['game_date_made']
-    #     if date_made > 2019-01-01:
-    #         raise forms.ValidationError('This game is too new')
-    #     if date_made < 1900-01-01:
-    #         raise forms.ValidationError('This game is too old')
+    # date made validation
+    def clean_game_date_made(self):
+        date_made = self.cleaned_data['game_date_made']
+        if date.today() < date_made:
+            raise forms.ValidationError('This game is not out yet')
+
+        return date_made
