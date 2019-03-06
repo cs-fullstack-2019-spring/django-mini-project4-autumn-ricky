@@ -20,7 +20,7 @@ def new_user(request):
 
         # check validation
         if new_user_form.is_valid():
-            # add user to udjango user table
+            # add user to django user table
             User.objects.create_user(request.POST["username"], "", request.POST["password1"])
             # add user to model
             new_user_form.save()
