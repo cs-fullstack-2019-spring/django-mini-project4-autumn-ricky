@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 # render welcome page
 def index(request):
+    # render welcome page
     return render(request, 'game_collector_app/index.html')
 
 
@@ -12,7 +13,9 @@ def index(request):
 def new_user(request):
     # import form
     new_user_form = UserForm(request.POST or None)
+    # pass new user page context
     context = {
+        # new user form
         'new_user_form': new_user_form
     }
     # on submit add user to user model and django admin user
@@ -35,12 +38,16 @@ def new_user(request):
 
 # render content for user
 def my_page(request):
-    # get items in game model by foreign key
+    # foreign key
     current_user = UserModel.objects.get(username=request.user)
+    # get items in game model by foreign key
     my_games = GameModel.objects.filter(game_user=current_user)
 
+    # pass user page context
     context = {
+        # foreign key
         'current_user': current_user,
+        # game from model
         'my_games': my_games
     }
     # render user page
@@ -51,7 +58,9 @@ def my_page(request):
 def add_game(request):
     # import form
     new_game_form = GameForm(request.POST or None)
+    # pass add game page context
     context = {
+        # new game form
         'new_game_form': new_game_form
     }
     # on submit add game to model and render user page
@@ -69,8 +78,11 @@ def add_game(request):
             # render user page
             return redirect('my_page')
         else:
+            # pass new game page context
             context = {
+                # new game form
                 'new_game_form': new_game_form,
+                # form validation errors
                 'errors': new_game_form.errors,
             }
             return render(request, 'game_collector_app/new_game.html', context)
@@ -89,7 +101,9 @@ def delete_game(request, id):
         game_item.delete()
         # render user page
         return redirect('my_page')
+    # pass delete game page context
     context = {
+        # game item
         'delete_game': game_item
     }
     # render delete form
@@ -108,7 +122,9 @@ def edit_game(request, id):
         edit_form.save()
         # render user page
         return redirect('my_page')
+    # pass new game page context
     context = {
+        # edit game form
         'new_game_form': edit_form
     }
     # on load render populated form
