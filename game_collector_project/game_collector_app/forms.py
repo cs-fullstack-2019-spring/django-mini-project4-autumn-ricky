@@ -21,7 +21,7 @@ class UserForm(forms.ModelForm):
 class GameForm(forms.ModelForm):
     class Meta:
         model = GameModel
-        fields = '__all__'
+        exclude = ['game_user']
 
     # age validation
     def clean_game_age_limit(self):
