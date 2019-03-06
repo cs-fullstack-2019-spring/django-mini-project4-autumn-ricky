@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+{% block content %}
+
+<!--welcome message-->
+<h2 class="jumbotron">Welcome to the Game Collector</h2>
+<!--login link-->
+<a href="{% url 'login' %}">Login</a>
+
+<br>
+
+<!--new user link-->
+<a href="{% url 'new_user' %}">Create a New User</a>
+
+{% endblock %}
+
+</body>
+</html>
