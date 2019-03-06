@@ -1,0 +1,15 @@
+{% extends 'game_collector_app/index.html' %}
+
+{% block content %}
+<!--page header-->
+<h2 class="jumbotron">Welcome New User</h2>
+<!--new user form-->
+<form method="POST">
+    {% csrf_token %}
+    {{ new_user_form.as_p }}
+    <button>Submit</button>
+</form>
+<!--link to index-->
+<a href="{% url 'index' %}">Back to Welcome Page</a>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'game_collector_app/index.html' %}
+
+{% block content %}
+<!--new game form-->
+<form method="POST">
+    {% csrf_token %}
+    {{ new_game_form.as_p }}
+    <button>Submit</button>
+    <br>
+</form>
+<!--link back to home page-->
+<a href="{% url 'my_page' %}">Back to Page</a>
+{% endblock %}

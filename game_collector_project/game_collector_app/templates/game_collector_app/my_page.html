@@ -1,0 +1,37 @@
+{% extends 'game_collector_app/index.html' %}
+
+{% block content %}
+
+<h2 class="jumbotron">Welcome to Your Games</h2>
+<br>
+<a href="{% url 'add_game' %}">Add a Game</a>
+<br>
+<table class="table">
+    <tr>
+        <th>Game</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <!--if the user has games-->
+    {%if my_games%}
+    <!--iterate games into table-->
+    {% for eachGame in my_games %}
+        <tr>
+        <td>{{ eachGame.game_name }}</td>
+        <!--edit and delete links-->
+        <td><a href="{% url 'edit_game' eachGame.id %}">Edit This Game</a></td>
+        <td><a href="{% url 'delete_game' eachGame.id %}">Delete This Game</a></td>
+        </tr>
+    {% endfor %}
+    {% else %}
+    <tr>
+        <td>No Games</td>
+        <td>No Games</td>
+        <td>No Games</td>
+    </tr>
+    {% endif %}
+</table>
+<br>
+<!--logout link-->
+<a href="{% url 'logout' %}"><button>LOGOUT</button></a>
+{% endblock %}

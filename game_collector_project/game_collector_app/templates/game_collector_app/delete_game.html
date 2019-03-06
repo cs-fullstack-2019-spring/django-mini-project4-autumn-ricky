@@ -1,0 +1,12 @@
+{% extends 'game_collector_app/index.html' %}
+
+{% block content %}
+<!--delete game confirmation-->
+<p>Are you sure you want to delete this game?</p>
+<form method="POST">
+    {% csrf_token %}
+    {{ delete_game }}
+    <br>
+    <button>Yes Delete</button>
+</form>
+{% endblock %}
