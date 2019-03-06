@@ -30,7 +30,15 @@
     <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
+<br>
+<!--link to create new user-->
+<form method="POST">or create a <a href="{% url 'create_user' %}">new user</a>
+    {% csrf_token %}
+    {{  new_user_form.as_p  }}
+</form>
+
 
 <hr/>
 </body>
 </html>
+

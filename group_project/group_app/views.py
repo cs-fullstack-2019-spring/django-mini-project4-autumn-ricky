@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 def index(request):
     return render(request, 'group_app/index.html')
 
- # function for games
+# function for games
 def my_games(request):
     games = GameModel.objects.all()
     context = {
@@ -26,8 +26,6 @@ def add_game(request):
     }
 
     if request.method == 'POST':
-        # save will add user info to the model
-        # game_fk_var = GameModel.objects.get(user_fk=request.user)
         game_form.save()
         return render(request, 'group_app/index.html', context)
 

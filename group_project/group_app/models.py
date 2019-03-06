@@ -9,7 +9,7 @@ class UserModel(models.Model):
     password1 = models.CharField(default=0, max_length=50)
     password2 = models.CharField(default=0, max_length=50)
     date_account_created = models.DateField(default=date.today)
-    rank = models.CharField(default="grunt", max_length=50)
+    # rank = models.CharField(default="grunt", max_length=50)
     # user model foreign key
     user_fk = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True),
 
