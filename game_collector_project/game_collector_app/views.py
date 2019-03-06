@@ -40,6 +40,7 @@ def my_page(request):
     my_games = GameModel.objects.filter(game_user=current_user)
 
     context = {
+        'current_user': current_user,
         'my_games': my_games
     }
     # render user page

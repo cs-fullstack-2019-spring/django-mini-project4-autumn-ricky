@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h2 class="jumbotron">Welcome to Your Games</h2>
+<h2 class="jumbotron">Welcome to Your Games {{ current_user }}!</h2>
 <br>
 <a href="{% url 'add_game' %}">Add a Game</a>
 <br>
