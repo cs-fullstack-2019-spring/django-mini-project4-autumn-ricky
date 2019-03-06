@@ -17,29 +17,28 @@ def new_user(request):
     }
     # on submit add user to user model and django admin user
     if request.method == 'POST':
-        # add to django admin user
-        User.objects.create_user(request.POST["username"], " ", request.POST["password1"])
 
-        # add to user model with django admin user foreign key (broken)
-        # instance = new_user_form.save(commit=False)
-        # instance.user_fk = request.user
-        # instance.save()
-
-        # add user to model
-        new_user_form.save()
-        return render(request, 'game_collector_app/index.html')
+        # check validation
+        if new_user_form.is_valid():
+            # add user to udjango user table
+            User.objects.create_user(request.POST["username"], "", request.POST["password1"])
+            # add user to model
+            new_user_form.save()
+            # render login page
+            return render(request, 'game_collector_app/index.html')
+        else:
+            # throw error
+            print("There was an error")
     # on load render blank form
     return render(request, 'game_collector_app/new_user.html', context)
 
 
 # render content for user
 def my_page(request):
-    # get items in game model by foreign key (broken)
-    # current_user = UserModel.objects.get(username=request.user)
-    # my_games = GameModel.objects.filter(game_user=current_user.username)
+    # get items in game model by foreign key
+    current_user = UserModel.objects.get(username=request.user)
+    my_games = GameModel.objects.filter(game_user=current_user)
 
-    # get all games
-    my_games = GameModel.objects.all()
     context = {
         'my_games': my_games
     }
@@ -57,15 +56,15 @@ def add_game(request):
     # on submit add game to model and render user page
     if request.method == 'POST':
 
-        # add game to model with fk automatic (broken)
-        # instance = new_game_form.save(commit=False)
-        # instance.game_user = request.user
-        # instance.save()
-
         # validation
         if new_game_form.is_valid():
-            # add game to model
-            new_game_form.save()
+            # grab foreign key
+            current_user = UserModel.objects.get(username=request.user)
+            # add game to model and pass foreign key/ logged in user
+            GameModel.objects.create(game_name=request.POST['game_name'], game_developer=request.POST['game_developer'],
+                                     game_age_limit=request.POST['game_age_limit'],
+                                     game_date_made=request.POST['game_date_made'],
+                                     game_user=current_user)
             # render user page
             return redirect('my_page')
         else:

@@ -8,21 +8,23 @@ class UserForm(forms.ModelForm):
         model = UserModel
         exclude = ['user_data_account_created', 'user_rank', 'user_fk']
 
-    def clean_password1(self):
-        password = self.cleaned_data['password1']
-        password2 = self.cleaned_data['password2']
-        # if password and password2 and password != password2:
-        if password != password2:
+    # validation
+    def clean(self):
+        # grab all
+        cleaned_data = super().clean()
+        # import attributes to validate
+        password1 = cleaned_data.get("password1")
+        password2 = cleaned_data.get("password2")
+        # throw errors
+        if password1 != password2:
             raise forms.ValidationError('Passwords Must Match')
-
-        return password
 
 
 # game model bound form
 class GameForm(forms.ModelForm):
     class Meta:
         model = GameModel
-        fields = '__all__'
+        exclude = ['game_user']
 
     # age validation
     def clean_game_age_limit(self):
